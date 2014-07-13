@@ -14,6 +14,8 @@ import java.util.Map.Entry;
 
 
 
+
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
@@ -22,11 +24,14 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
 
+import core.constant.constant;
+import core.util.StringUtil;
+
 public class LogInterceptor implements Interceptor {
 
 	private static final long serialVersionUID = 1L;
 	
-	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private SimpleDateFormat sdf = new SimpleDateFormat(constant.DATE_FORMAT);
 
 	@Override
 	public void destroy() {
@@ -56,7 +61,7 @@ public class LogInterceptor implements Interceptor {
 			paramters.append("&");
 			paramters.append(entry.getKey());
 			paramters.append("=");
-			paramters.append(entry.getValue());
+			paramters.append(StringUtil.arr2Str((String[])entry.getValue()));
 		}
 		System.out.println(sdf.format(new Date())+" struts->LogInterceptor::requestInfo > "+
 				uri+"["+(endTime - startTime)+"]::"+paramters.toString());

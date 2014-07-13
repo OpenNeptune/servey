@@ -1,0 +1,85 @@
+package core.service.interceptor;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
+import org.aspectj.lang.ProceedingJoinPoint;
+
+import app.model.User;
+
+import com.opensymphony.xwork2.ActionContext;
+
+import core.constant.constant;
+import core.model.ServiceLog;
+import core.util.StringUtil;
+/**
+ * 利用SpringAOP实现业务层的日志记录
+ */
+public class ServiceIntercetor {
+	
+	private SimpleDateFormat sdf = new SimpleDateFormat(constant.DATE_FORMAT);
+	
+	//定义任何方法调用的切入点
+	private ServiceLog log = new ServiceLog();
+	
+    public Object logAop(ProceedingJoinPoint pjp){
+		try{
+			//获取session中的数据
+			ActionContext context = ActionContext.getContext();
+			if(context != null){
+				Map<String, Object> session = context.getSession();
+				if(session != null){
+					User user = (User) session.get("user");
+					if(user != null){
+						log.setUserName(user.getUsername());
+					}
+				}
+				HttpServletRequest request = ServletActionContext.getRequest();
+				if(request != null){
+					String uri=request.getRequestURI();
+					Map<String, Object> actionParam = context.getParameters();
+					StringBuffer paramters = new StringBuffer();
+					Iterator<Entry<String, Object>> iterator = actionParam.entrySet().iterator();
+					Entry<String, Object> entry;
+					while(iterator.hasNext()){
+						entry =iterator.next();
+						paramters.append("&");
+						paramters.append(entry.getKey());
+						paramters.append("=");
+						paramters.append(StringUtil.arr2Str((String[])entry.getValue()));
+					}
+					log.setUri(uri+"?"+paramters.toString());
+				}
+			}
+			
+			//操作名称
+			String opeationName =pjp.getTarget()+"::"+pjp.getSignature().getName();
+			log.setOperationName(opeationName);
+			//操作参数 
+			log.setOperationParam(StringUtil.arr2Str(pjp.getArgs()));
+			
+			//调用目标对象的方法
+			Object ret = pjp.proceed();
+			//设置操作结果
+			log.setResult("success");
+			//设置结果消息
+			if(ret != null){
+				log.setMsg(ret.toString());
+			}
+			return ret ;
+		}catch(Throwable e){
+			log.setResult("Exception");
+			log.setMsg(e.getMessage());
+		}finally{
+			System.out.println(sdf.format(new Date())+" spring->ServiceIntercetor::serviceLog > "+log);
+		}
+		return null;
+	}
+	
+}

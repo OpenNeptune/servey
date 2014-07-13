@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<s:property value="#session.user.username"/>
+	<s:a action="login_tlogin.action">用户登录</s:a>
 	<s:a action="user_tregister.action">用户注册</s:a>
 </body>
 </html>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import app.model.User;
 import app.service.UserService;
 import core.service.impl.SupportServiceImpl;
+import core.util.sec;
 import core.util.validate;
 
 @Service("userService")
@@ -35,9 +36,12 @@ public class UserServiceImpl extends SupportServiceImpl<User> implements UserSer
 	}
 
 	@Override
-	public boolean vaildateLogin(String username, String password) {
-		// TODO Auto-generated method stub
-		return false;
+	public User login(User user) {
+		String hql = "from User u where u.username = ? and u.password = ?" ;
+		List<User> list = this.findEntityByHQL(hql,user.getUsername(),sec.md5(user.getPassword()));
+		return validate.isValid(list)?list.get(0):null;
 	}
+
+
 
 }

@@ -5,31 +5,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="style/form.css">
-<title>用户注册</title>
+<title>用户登录</title>
 </head>
 <body>
-	<s:form action="/user_register" method="post" cssClass="register">
+	<s:form action="/login_login" method="post" cssClass="register">
 		<div class="form-tr">
 				<div>UserName:</div>
 				<s:textfield name="username"/>
 				<s:fielderror cssClass="errormsg"><s:param>username</s:param></s:fielderror>
 		</div>
 		<div class="form-tr">
-				<div>E-Mail:</div>
-				<s:textfield name="email"/>
-				<s:fielderror cssClass="errormsg"><s:param>email</s:param></s:fielderror>
-		</div>
-		<div class="form-tr">
 				<div>Password:</div>
 				<s:password name="password"/>
 				<s:fielderror cssClass="errormsg"><s:param>password</s:param></s:fielderror>
 		</div>
-		<div class="form-tr">
-				<div>Re-Password:</div>
-				<s:password name="confirPassword"/>
-				<s:fielderror cssClass="errormsg"><s:param>confirPassword</s:param></s:fielderror>
-		</div>
-		<s:submit value="JOIN-IN"></s:submit>
+		<s:submit value="LOGIN"></s:submit>
+		<s:a action="/user_tregister.action"></s:a>
 	</s:form>
 </body>
 </html>

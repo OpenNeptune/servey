@@ -2,7 +2,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 	
 	<!-- 通过context指定外部引用的属性文件 -->
@@ -29,16 +31,12 @@
         <property name="hibernateProperties">
              <props>
                 <!-- 指定Hibernate的连接方言 -->
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle9Dialect</prop>
                 <!-- 配置启动应用时，是否根据Hibernate映射自动创建数据表 -->
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
-                <prop key="hibernate.format_sql">true</prop>
-				<prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">false</prop>
+				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.cache.use_second_level_cache">true</prop>
-				<!--  
-				<prop key="hibernate.cache.provider_class">net.sf.ehcache.hibernate.EhCacheProvider</prop>
-				<prop key="hibernate.cache.use_query_cache">true</prop>
-				-->
            </props>
         </property>
         <!-- 全部映射文件 -->
@@ -52,7 +50,24 @@
         	</list>
         </property>
     </bean>
-	
+	<!-- 使用Spring管理事务 -->
+	<!--  
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED" isolation="DEFAULT"/>
+			<tx:method name="update*" propagation="REQUIRED" isolation="DEFAULT"/>
+			<tx:method name="delete*" propagation="REQUIRED" isolation="DEFAULT"/>
+			<tx:method name="batch*" propagation="REQUIRED" isolation="DEFAULT"/>
+			
+			<tx:method name="load*" propagation="REQUIRED" isolation="DEFAULT" read-only="true"/>
+			<tx:method name="get*" propagation="REQUIRED" isolation="DEFAULT" read-only="true"/>
+			<tx:method name="find*" propagation="REQUIRED" isolation="DEFAULT" read-only="true"/>
+			
+			<tx:method name="*" propagation="REQUIRED" isolation="DEFAULT"/>
+		</tx:attributes>
+	</tx:advice>
+	-->
+	<!-- 配置hibernteTemplate -->
 	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
   		<property name="sessionFactory" ref="sessionFactory"></property>
  	</bean>

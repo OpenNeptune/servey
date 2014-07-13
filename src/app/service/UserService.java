@@ -16,8 +16,9 @@ public interface UserService extends SupportService<User> {
 	//判断是否是一个可用的邮箱地址
 	public boolean isRegisterByEmail(String emial);
 	
-	//判断是否可以使用用户和密码进行登录
-	public boolean vaildateLogin(String username,String password);
+	
+	//用户登录
+	public User login(User user);
 	
 	
 }

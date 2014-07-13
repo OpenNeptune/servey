@@ -15,14 +15,19 @@
 	
 	<!-- 定义一个有日志打印的拦截器栈 -->
 	<interceptors>
-		<interceptor name="log" class="core.struts.interceptor.LogInterceptor"></interceptor>
+		<interceptor name="login" class="app.struts.interceptor.loginInterceptor"/>
+		<interceptor name="log" class="core.struts.interceptor.LogInterceptor"/>
 		<interceptor-stack name="logstack">
+			<interceptor-ref name="login"></interceptor-ref>
 			<interceptor-ref name="log"></interceptor-ref>
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</interceptor-stack>
 	</interceptors>
 	<default-interceptor-ref name="logstack"></default-interceptor-ref>
-	
+	<!-- 定义全局结果 -->
+	<global-results>
+		<result name="login">/user/login.jsp</result>
+	</global-results>
 	
 	<action name="user_*" class="userAction" method="exec_{1}">
 		<result name="register">/user/register.jsp</result>
@@ -30,6 +35,10 @@
 		<result name="success">/user/success.jsp</result>
 	</action>
 	
+	<action name="login_*" class="userAction" method="exec_{1}">
+		<result name="input">/user/login.jsp</result>
+		<result name="login_success">/index.jsp</result>
+	</action>
 	</package>
 	
 	<!-- 包含其他文件 -->

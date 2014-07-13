@@ -1,6 +1,10 @@
 package core.util;
 
 import java.util.Collection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import core.constant.constant;
 
 public class validate {
 	
@@ -24,5 +28,14 @@ public class validate {
 	 */
 	public static boolean isValid(Object[] arr){
 		return !(arr==null || arr.length==0);
+	}
+	
+	/**
+	 * 判断是否是一个有效的邮箱地址
+	 */
+	public static boolean isEmail(String email){
+		Pattern p =  Pattern.compile(constant.REG_EMAIL);
+        Matcher m = p.matcher(email);  
+        return m.matches();  
 	}
 }
