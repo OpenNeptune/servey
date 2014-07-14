@@ -8,10 +8,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.hibernate.Query;
 import org.hibernate.SQLQuery;
-import org.hibernate.SessionFactory;
-import org.hibernate.classic.Session;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import core.dao.SupportDao;
@@ -72,18 +69,13 @@ public abstract class SupportDaoImpl<T>  implements SupportDao<T> {
 	@SuppressWarnings("unchecked")
 	public List<T> getEntryListByHQL(String hql,Object ...objects) {
 		List<T> list = (List<T>) hibernateTemplate.find(hql,objects);
-//		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
-//		for(int i = 0 ; i < objects.length ; i ++){
-//			query.setParameter(i, objects[i]);
-//		}
-//		return query.list();
 		return list;
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<T> getEntryListBySQL(String sql,Object ...objects) {
 		//如果没有开启事务管理，在线程中不允许获取session
-		SQLQuery q =  this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql);
+		SQLQuery q =  hibernateTemplate.getSessionFactory().getCurrentSession().createSQLQuery(sql);
 		//添加实体类
 		if(clazz != null){
 			q.addEntity(clazz);

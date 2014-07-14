@@ -2,33 +2,32 @@ package core.service.impl;
 
 import java.util.List;
 
-import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import core.dao.SupportDao;
 import core.service.SupportService;
 
-@SuppressWarnings({ "unchecked", "rawtypes" })
 public abstract class SupportServiceImpl<T> implements SupportService<T> {
 	
 		public Logger log = Logger.getLogger(this.getClass());
 	
+		@Autowired
+		private SupportDao<T> supportDao;
 		
-		private SupportDao supportDao;
-		
-		@Resource
-		public void setSupportDao(SupportDao supportDao) {
-			this.supportDao = supportDao;
-		}
-
-		public SupportDao getSupportDao(){
-			return this.supportDao;
-		}
-		
-		@Override
 		public void saveEntry(T t) {
 			supportDao.saveEntry(t);
+		}
+
+
+		public SupportDao<T> getSupportDao() {
+			return supportDao;
+		}
+
+
+		public void setSupportDao(SupportDao<T> supportDao) {
+			this.supportDao = supportDao;
 		}
 
 

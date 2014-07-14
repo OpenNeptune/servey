@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
@@ -16,20 +17,34 @@ import app.model.User;
 import com.opensymphony.xwork2.ActionContext;
 
 import core.constant.constant;
-import core.model.ServiceLog;
+import core.model.BusinessLog;
+import core.service.BusinessLogService;
 import core.util.StringUtil;
 /**
  * 利用SpringAOP实现业务层的日志记录
  */
 public class ServiceIntercetor {
 	
+	@Resource(name="businessLogService")
+	private BusinessLogService businessLogService;
+
+	public void setBusinessLogService(BusinessLogService businessLogService) {
+		this.businessLogService = businessLogService;
+	}
+
 	private SimpleDateFormat sdf = new SimpleDateFormat(constant.DATE_FORMAT);
 	
 	//定义任何方法调用的切入点
-	private ServiceLog log = new ServiceLog();
+	private BusinessLog log = new BusinessLog();
 	
     public Object logAop(ProceedingJoinPoint pjp){
 		try{
+			//操作名称
+			String opeationName =pjp.getTarget().getClass().getName()+"::"+pjp.getSignature().getName();
+			log.setOperationName(opeationName);
+			//操作参数 
+			log.setOperationParam(StringUtil.arr2Str(pjp.getArgs()));
+			
 			//获取session中的数据
 			ActionContext context = ActionContext.getContext();
 			if(context != null){
@@ -43,6 +58,8 @@ public class ServiceIntercetor {
 				HttpServletRequest request = ServletActionContext.getRequest();
 				if(request != null){
 					String uri=request.getRequestURI();
+					String address=request.getRemoteAddr();
+					log.setAddress(address);
 					Map<String, Object> actionParam = context.getParameters();
 					StringBuffer paramters = new StringBuffer();
 					Iterator<Entry<String, Object>> iterator = actionParam.entrySet().iterator();
@@ -57,13 +74,6 @@ public class ServiceIntercetor {
 					log.setUri(uri+"?"+paramters.toString());
 				}
 			}
-			
-			//操作名称
-			String opeationName =pjp.getTarget()+"::"+pjp.getSignature().getName();
-			log.setOperationName(opeationName);
-			//操作参数 
-			log.setOperationParam(StringUtil.arr2Str(pjp.getArgs()));
-			
 			//调用目标对象的方法
 			Object ret = pjp.proceed();
 			//设置操作结果
@@ -77,7 +87,7 @@ public class ServiceIntercetor {
 			log.setResult("Exception");
 			log.setMsg(e.getMessage());
 		}finally{
-			System.out.println(sdf.format(new Date())+" spring->ServiceIntercetor::serviceLog > "+log);
+			businessLogService.save(log);
 		}
 		return null;
 	}

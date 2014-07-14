@@ -1,12 +1,30 @@
 package core.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ServiceLog {
+/**
+ * 
+ * @summary:
+ * 		业务层的日志
+ */
+public class BusinessLog {
+	private static final SimpleDateFormat sdf = new SimpleDateFormat(core.constant.constant.DATE_FORMAT);
+	
 	private Integer id;
 	
 	private String  userName;
 	
+	private String address;
+	
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	private Date  startTime = new Date();
 	
 	private String uri;
@@ -85,7 +103,7 @@ public class ServiceLog {
 
 	@Override
 	public String toString() {
-		return "ServiceLog [id=" + id + ", userName=" + userName + ", startTime=" + startTime + ", uri=" + uri + ", operationName=" + operationName + ", operationParam=" + operationParam + ", result=" + result + ", msg=" + msg + "]";
+		return "ServiceLog [id=" + id + ", userName=" + userName + ", startTime=" + sdf.format(startTime) + ", uri=" + uri + ", operationName=" + operationName + ", operationParam=" + operationParam + ", result=" + result + ", msg=" + msg + "]";
 	}
 	
 }
