@@ -3,10 +3,10 @@ package app.struts.interceptor;
 import app.model.User;
 import app.struts.action.userAction;
 
+import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
 
-import core.struts.Action.SupportAction;
 /**
  * 登录拦截器 
  *
@@ -27,9 +27,8 @@ public class loginInterceptor implements Interceptor {
 	}
 
 	@Override
-	@SuppressWarnings("rawtypes")
 	public String intercept(ActionInvocation paramActionInvocation) throws Exception {
-		SupportAction action = (SupportAction) paramActionInvocation.getAction();
+		Action action = (Action) paramActionInvocation.getAction();
 		String actionName = paramActionInvocation.getProxy().getActionName();
 		if(action instanceof userAction){
 			if("login_tlogin".equals(actionName) ||"login_login".equals(actionName)

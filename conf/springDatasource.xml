@@ -68,8 +68,10 @@
 	<tx:attributes>
 			<!--所有以get开头的方法是read-only的-->
 			<tx:method name="get*" read-only="true"/>
+			<tx:method name="load*" read-only="true"/>
+			<tx:method name="find*" read-only="true"/>
 			<!--其方法方法使用默认的事务设置-->
-			<tx:method name="*"/>
+			<tx:method name="*" propagation="REQUIRED" isolation="DEFAULT"/>
 	</tx:attributes>
 	</tx:advice>
 </beans>

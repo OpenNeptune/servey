@@ -39,6 +39,11 @@
 		<result name="input">/user/login.jsp</result>
 		<result name="login_success">/index.jsp</result>
 	</action>
+	
+	<action name="tran_*" class="transactionAction" method="exec_{1}">
+		<result name="input">/tx/tx.jsp</result>
+		<result name="success">/index.jsp</result>
+	</action>
 	</package>
 	
 	<!-- 包含其他文件 -->

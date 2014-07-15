@@ -1,7 +1,5 @@
 package core.service.interceptor;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -16,7 +14,6 @@ import app.model.User;
 
 import com.opensymphony.xwork2.ActionContext;
 
-import core.constant.constant;
 import core.model.BusinessLog;
 import core.service.BusinessLogService;
 import core.util.StringUtil;
@@ -32,7 +29,6 @@ public class ServiceIntercetor {
 		this.businessLogService = businessLogService;
 	}
 
-	private SimpleDateFormat sdf = new SimpleDateFormat(constant.DATE_FORMAT);
 	
 	//定义任何方法调用的切入点
 	private BusinessLog log = new BusinessLog();
