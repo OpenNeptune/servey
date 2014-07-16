@@ -44,6 +44,12 @@
 		<result name="input">/tx/tx.jsp</result>
 		<result name="success">/index.jsp</result>
 	</action>
+	
+	
+	<!-- 业务层的操作日志 -->
+	<action name="log_list" class="businessLogAction" method="exec_listlog">
+		<result>/buesslog/list.jsp</result>
+	</action>
 	</package>
 	
 	<!-- 包含其他文件 -->
