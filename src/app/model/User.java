@@ -1,15 +1,40 @@
 package app.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class User {
 	
 	private Integer userid;
 	
 	private String username;
+	
+	private String nickname;
 
 	private String email;
 	
 	private String password;
+
+	//用户拥有的角色组
+	private Set<Role> roles = new HashSet<Role>();
 	
+	
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
 	public Integer getUserid() {
 		return userid;
 	}
@@ -41,11 +66,5 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	@Override
-	public String toString() {
-		return "User [userid=" + userid + ", username=" + username + ", email=" + email + ", password=" + password + "]";
-	}
-
 	
 }

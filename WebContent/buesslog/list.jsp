@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="Stylesheet" type="text/css" href="style/table.css">
 <title>业务层的操作日志</title>
 <style type="text/css">
 	table{
@@ -32,16 +33,6 @@
 </style>
 </head>
 <body>
-<div>
-	总记录:<s:property value="model.allRow"/> 
-	|页数:<s:property value="model.totalPage"/>
-	<s:if test="model.isHasPreviousPage()">
-	<s:a href="log_list.action?model.currentPage=%{model.currentPage - 1}">上一页</s:a>
-	</s:if>
-	<s:if test="model.isHasNextPage()">
-	<s:a href="log_list.action?model.currentPage=%{model.currentPage + 1}">下一页</s:a>
-	</s:if>
-</div>
 <table>
 	<tr>
 		<th>行号</th>
@@ -60,5 +51,15 @@
 		</tr>
 	</s:iterator>
 </table>
+<div class="nav">
+	总记录:<s:property value="model.allRow"/> 
+	|页数:<s:property value="model.totalPage"/>
+	<s:if test="model.isHasPreviousPage()">
+	<s:a href="log_list.action?model.currentPage=%{model.currentPage - 1}">上一页</s:a>
+	</s:if>
+	<s:if test="model.isHasNextPage()">
+	<s:a href="log_list.action?model.currentPage=%{model.currentPage + 1}">下一页</s:a>
+	</s:if>
+</div>
 </body>
 </html>

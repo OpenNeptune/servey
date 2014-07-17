@@ -4,14 +4,20 @@ package core.dao.impl;
  * 		用于完成DAO操作的抽象基类，主要用于继承
  ******************************************************************/
 import java.lang.reflect.ParameterizedType;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
+import org.hibernate.Session;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import core.dao.SupportDao;
+import core.model.EntryPage;
 
 
 public abstract class SupportDaoImpl<T>  implements SupportDao<T> {
@@ -90,5 +96,30 @@ public abstract class SupportDaoImpl<T>  implements SupportDao<T> {
 	@Override
 	public List<T> findEntityByHQL(String hql, Object[] objects) {
 		return (List<T>) hibernateTemplate.find(hql,objects);
+	}
+	
+	/**
+	 * page默认值为1. 从第一页开始
+	 * size默认值为100,每页100条记录
+	 */
+	@SuppressWarnings({ "unchecked", "deprecation","rawtypes" })
+	public EntryPage query(final String hql, int page, final int size) {
+		final EntryPage pageInfo = new EntryPage();
+		pageInfo.setPageSize(size);
+		pageInfo.setCurrentPage(page);
+		pageInfo.setAllRow(hibernateTemplate.find(hql).size());
+		pageInfo.init();
+		List<Object> list = (List<Object>) getHibernateTemplate().executeFind(new HibernateCallback(){
+	            public Object doInHibernate(Session session) throws HibernateException,SQLException{
+	                Query query = session.createQuery(hql);
+	                query.setFirstResult(pageInfo.getOffset());
+	                query.setMaxResults(size);
+					List list = query.list();
+	                return list;
+	            }
+	    });
+		pageInfo.setList(list);
+		pageInfo.init();
+		return pageInfo;
 	}
 }

@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="core.model.BusinessLog" table="BUSINESS_OPERATION_LOG">
+    <class name="core.model.BusinessLog" table="TBL_HBM_OPERATION_LOG">
         <id name="id" type="java.lang.Integer">
             <column name="ID" />
            <generator class="native"/>

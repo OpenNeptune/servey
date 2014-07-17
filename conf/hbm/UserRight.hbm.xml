@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!-- 配置用户，角色，权限相关的映射文件 -->
+<hibernate-mapping>
+
+	<!-- 映射UserVO -->
+	<class name="app.model.User" table="TBL_HBM_user">
+		<id name="userid" type="java.lang.Integer">
+			<generator class="native"/>
+		</id>
+		<property name="username" not-null="true"/>
+		<property name="email" not-null="true"></property>
+		<property name="password" not-null="true"></property>
+		<!-- 用户到角色的多对多 -->
+		<set name="roles" table="TBL_HBM_user_role_link" lazy="false">
+			<key column="userid" />
+			<many-to-many class="app.model.Role" column="RoleId" />
+		</set>
+	</class>
+
+
+	<!-- 配置角色 -->
+    <class name="app.model.Role" table="TBL_HBM_ROLE">
+        <id name="RoleId" type="java.lang.Integer">
+            <column name="ROLEID" />
+            <generator class="native" />
+        </id>
+        <property name="RoleName" type="java.lang.String">
+            <column name="ROLENAME" />
+        </property>
+        <property name="NickName" type="java.lang.String">
+            <column name="NICKNAME" />
+        </property>
+        <property name="RoleValue" type="java.lang.String">
+            <column name="ROLEVALUE" />
+        </property>
+        <property name="RoleDesc" type="java.lang.String">
+            <column name="ROLEDESC" />
+        </property>
+        <set name="rights" table="TBL_HBM_ROLE_RIGHT_LINK" inverse="false" lazy="true">
+            <key>
+                <column name="ROLEID" />
+            </key>
+            <many-to-many class="app.model.Right" column="RightId"/>
+        </set>
+    </class>
+    
+    <!-- 配置权限 -->
+    <class name="app.model.Right" table="TBL_HBM_RIGHT">
+        <id name="RightId" type="java.lang.Integer">
+            <column name="RightId" />
+            <generator class="native" />
+        </id>
+        <property name="RightName" type="java.lang.String">
+            <column name="RIGHTNAME" />
+        </property>
+        <property name="RightDesc" type="java.lang.String">
+            <column name="RIGHTDESC" />
+        </property>
+        <property name="uri" type="java.lang.String">
+            <column name="URI" />
+        </property>
+        <property name="RigthPos" type="int" update="false" >
+            <column name="RIGTHPOS" />
+        </property>
+        <property name="RigthCode" type="long" update="false">
+            <column name="RIGTHCODE" />
+        </property>
+    </class>
+</hibernate-mapping>

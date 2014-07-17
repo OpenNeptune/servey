@@ -50,7 +50,18 @@
 	<action name="log_list" class="businessLogAction" method="exec_listlog">
 		<result>/buesslog/list.jsp</result>
 	</action>
+	
+	<!-- 角色管理 -->
+	<action name="role_*" class="roleAction" method="exec_{1}">
+		<result name="add_page">/role/add.jsp</result>
+		<result name="input">/role/add.jsp</result>
+		<result name="success">/role/list.jsp</result>
+		<result name="list" type="chain">role_list</result>
+	</action>
+	
 	</package>
+	
+	
 	
 	<!-- 包含其他文件 -->
 	<!--  

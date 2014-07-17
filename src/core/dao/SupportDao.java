@@ -2,6 +2,8 @@ package core.dao;
 
 import java.util.List;
 
+import core.model.EntryPage;
+
 public interface SupportDao<T> {
 	
 	//DAO层的API
@@ -24,5 +26,7 @@ public interface SupportDao<T> {
 	public List<T> getEntryListBySQL(String sql,Object ...objects);
 
 	public List<T> findEntityByHQL(String hql, Object[] objects);
+	
+	public EntryPage query(final String hql, int page, final int size);
 	
 }

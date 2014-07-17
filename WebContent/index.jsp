@@ -11,5 +11,6 @@
 	<s:a action="login_tlogin.action">用户登录</s:a>
 	<s:a action="user_tregister.action">用户注册</s:a>
 	<s:a action="log_list.action">业务日志</s:a>
+	<s:a action="role_list.action">角色管理</s:a>
 </body>
 </html>

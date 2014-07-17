@@ -3,10 +3,12 @@ package core.service.impl;
 import java.util.List;
 
 
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import core.dao.SupportDao;
+import core.model.EntryPage;
 import core.service.SupportService;
 
 public abstract class SupportServiceImpl<T> implements SupportService<T> {
@@ -75,4 +77,8 @@ public abstract class SupportServiceImpl<T> implements SupportService<T> {
 			return supportDao.findEntityByHQL(hql, objects);
 		}
 
+		public EntryPage query(final String hql, int page, final int size){
+			return supportDao.query(hql, page, size);
+		}
+		
 }

@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2014-7-15 17:52:14 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="app.model.Book" table="BOOK">
+    <class name="app.model.Book" table="TBL_HBM_BOOK">
         <id name="id" type="java.lang.Integer">
             <column name="ID" />
             <generator class="native" />
