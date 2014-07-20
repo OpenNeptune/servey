@@ -12,56 +12,62 @@
 	
 	
 	<package name="default"  extends="struts-default">
-	
-	<!-- 定义一个有日志打印的拦截器栈 -->
-	<interceptors>
-		<interceptor name="login" class="app.struts.interceptor.loginInterceptor"/>
-		<interceptor name="log" class="core.struts.interceptor.LogInterceptor"/>
-		<interceptor-stack name="logstack">
-			<interceptor-ref name="login"></interceptor-ref>
-			<interceptor-ref name="log"></interceptor-ref>
-			<interceptor-ref name="defaultStack"></interceptor-ref>
-		</interceptor-stack>
-	</interceptors>
-	<default-interceptor-ref name="logstack"></default-interceptor-ref>
-	<!-- 定义全局结果 -->
-	<global-results>
-		<result name="login">/user/login.jsp</result>
-	</global-results>
-	
-	<action name="user_*" class="userAction" method="exec_{1}">
-		<result name="register">/user/register.jsp</result>
-		<result name="input">/user/register.jsp</result>
-		<result name="success">/user/success.jsp</result>
-	</action>
-	
-	<action name="login_*" class="userAction" method="exec_{1}">
-		<result name="input">/user/login.jsp</result>
-		<result name="login_success">/index.jsp</result>
-	</action>
-	
-	<action name="tran_*" class="transactionAction" method="exec_{1}">
-		<result name="input">/tx/tx.jsp</result>
-		<result name="success">/index.jsp</result>
-	</action>
-	
-	
-	<!-- 业务层的操作日志 -->
-	<action name="log_list" class="businessLogAction" method="exec_listlog">
-		<result>/buesslog/list.jsp</result>
-	</action>
-	
-	<!-- 角色管理 -->
-	<action name="role_*" class="roleAction" method="exec_{1}">
-		<result name="add_page">/role/add.jsp</result>
-		<result name="input">/role/add.jsp</result>
-		<result name="success">/role/list.jsp</result>
-		<result name="list" type="chain">role_list</result>
-	</action>
-	
+		
+		<!-- 定义一个有日志打印的拦截器栈 -->
+		<interceptors>
+			<interceptor name="login" class="app.struts.interceptor.loginInterceptor"/>
+			<interceptor name="log" class="core.struts.interceptor.LogInterceptor"/>
+			<interceptor-stack name="logstack">
+				<interceptor-ref name="login"></interceptor-ref>
+				<interceptor-ref name="log"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="logstack"></default-interceptor-ref>
+		<!-- 定义全局结果 -->
+		<global-results>
+			<result name="login">/user/login.jsp</result>
+		</global-results>
+		
+		<action name="user_*" class="userAction" method="exec_{1}">
+			<result name="register">/user/register.jsp</result>
+			<result name="input">/user/register.jsp</result>
+			<result name="success">/user/success.jsp</result>
+		</action>
+		
+		<action name="login_*" class="userAction" method="exec_{1}">
+			<result name="input">/user/login.jsp</result>
+			<result name="login_success">/index.jsp</result>
+		</action>
+		
+		<action name="tran_*" class="transactionAction" method="exec_{1}">
+			<result name="input">/tx/tx.jsp</result>
+			<result name="success">/index.jsp</result>
+		</action>
+		
+		
+		<!-- 业务层的操作日志 -->
+		<action name="log_list" class="businessLogAction" method="exec_listlog">
+			<result>/buesslog/list.jsp</result>
+		</action>
+		
+		<!-- 角色管理 -->
+		<action name="role_*" class="roleAction" method="exec_{1}">
+			<result name="add_page">/role/add.jsp</result>
+			<result name="input">/role/add.jsp</result>
+			<result name="success">/role/list.jsp</result>
+			<result name="list" type="chain">role_list</result>
+		</action>
+			
+		<!-- 功能管理 -->
+		<action name="right_*" class="rightAction" method="exec_{1}">
+			<result name="add_page">/role/rightadd.jsp</result>
+			<result name="input">/role/rightadd.jsp</result>
+			<result name="success">/role/rightlist.jsp</result>
+			<result name="list" type="chain">right_list</result>
+		</action>
 	</package>
-	
-	
+
 	
 	<!-- 包含其他文件 -->
 	<!--  
