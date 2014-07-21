@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
     <wb-module deploy-name="servey">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/conf"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/JUnit"/>
-        <property name="context-root" value="servey"/>
         <property name="java-output-path" value="/servey/build/classes"/>
+        <property name="context-root" value="servey"/>
     </wb-module>
 </project-modules>
