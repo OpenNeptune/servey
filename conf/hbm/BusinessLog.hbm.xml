@@ -17,8 +17,8 @@
         <property name="startTime" type="java.util.Date" not-null="true">
             <column name="STARTTIME" />
         </property>
-        <property name="uri" type="java.lang.String" length="800" >
-            <column name="URI" />
+        <property name="uri" type="java.lang.String">
+            <column name="URI" length="1200" />
         </property>
         <property name="operationName" type="java.lang.String" length="100"  not-null="true">
             <column name="OPERATIONNAME" />
@@ -27,10 +27,10 @@
             <column name="OPERATIONPARAM" />
         </property>
         <property name="result" type="java.lang.String">
-            <column name="RESULT" />
+            <column name="RESULT"  length="100"/>
         </property>
         <property name="msg" type="java.lang.String">
-            <column name="MSG" />
+            <column name="MSG" length="2000" />
         </property>
     </class>
 </hibernate-mapping>

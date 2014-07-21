@@ -64,11 +64,11 @@ public abstract class SupportDaoImpl<T>  implements SupportDao<T> {
 		hibernateTemplate.delete(t);
 	}
 
-	public T loadEntry(String id) {
+	public T loadEntry(Integer id) {
 		return hibernateTemplate.load(clazz, id);
 	}
 
-	public T getEntry(String id) {
+	public T getEntry(Integer id) {
 		return hibernateTemplate.get(clazz, id);
 	}
 

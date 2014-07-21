@@ -113,7 +113,11 @@ public class EntryPage {
         return currentPage != 1;        //只要当前页不是第1页
     }
     public boolean isHasNextPage() {
-        return currentPage != totalPage;    //只要当前页不是最后1页
+    	if(totalPage == 0){
+    		return false;
+    	}else{
+    		return currentPage != totalPage; 
+    	}
     }
     
     

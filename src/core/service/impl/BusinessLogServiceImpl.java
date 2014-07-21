@@ -12,5 +12,7 @@ public class BusinessLogServiceImpl extends SupportServiceImpl<BusinessLog> impl
 	public void save(BusinessLog log) {
 		this.saveEntry(log);
 	}
+
+
 	
 }

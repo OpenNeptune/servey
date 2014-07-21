@@ -21,10 +21,10 @@ public interface SupportDao<T> {
 	public void deleteEntryById(T t);
 	
 	//加载实体
-	public T loadEntry(String id);
+	public T loadEntry(Integer id);
 	
 	//加载实体
-	public T getEntry(String id);
+	public T getEntry(Integer id);
 	
 	//以HQL方式批量操作
 	public int batchByHQL(String hql,Object ...objects);

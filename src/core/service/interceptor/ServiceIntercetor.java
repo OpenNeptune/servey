@@ -28,8 +28,6 @@ public class ServiceIntercetor {
 	public void setBusinessLogService(BusinessLogService businessLogService) {
 		this.businessLogService = businessLogService;
 	}
-
-	
 	//定义任何方法调用的切入点
 	private BusinessLog log = new BusinessLog();
 	
@@ -81,7 +79,12 @@ public class ServiceIntercetor {
 			return ret ;
 		}catch(Throwable e){
 			log.setResult("Exception");
-			log.setMsg(e.getMessage());
+			//message只保存2000个字符
+			String msg= e.getMessage();
+			if(msg.length() > 2000){
+				msg = msg.substring(0, 2000);
+			}
+			log.setMsg(msg);
 		}finally{
 			businessLogService.save(log);
 		}

@@ -27,6 +27,8 @@ public class BusinessLog {
 
 	private Date  startTime = new Date();
 	
+	//地址栏请求的数据的地址(此处可将地址栏请请求参数绑定到同一个字段中，
+	//当然可以将他们分开，另外也可以通过uri做很多的判断)
 	private String uri;
 	
 	private String operationName;

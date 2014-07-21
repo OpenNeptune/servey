@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 
 import app.model.Right;
 import app.service.RightService;
+
+
 import core.model.EntryPage;
 import core.struts.Action.SupportAction;
 
@@ -23,6 +25,16 @@ public class RightAction extends SupportAction<Right>{
 	
 	private EntryPage pageList = new EntryPage();
 	
+	private Integer RightId;
+	
+	public void setRightId(Integer rightId) {
+		RightId = rightId;
+	}
+	public Integer getRightId() {
+		return RightId;
+	}
+
+
 	@Resource(name="rightService")
 	private RightService rightService;
 
@@ -32,13 +44,14 @@ public class RightAction extends SupportAction<Right>{
 	public void setRightService(RightService rightService) {
 		this.rightService = rightService;
 	}
+	
+	
 	public EntryPage getPageList() {
 		return pageList;
 	}
 	public void setPageList(EntryPage pageList) {
 		this.pageList = pageList;
 	}
-	
 	
 	//
 	//Action方法
@@ -54,8 +67,19 @@ public class RightAction extends SupportAction<Right>{
 	 * 新增一个功能
 	 */
 	public String exec_save(){
-		rightService.save(model);
+		rightService.saveOrUpdate(model);
 		return "list";
+	}
+
+	/**
+	 * 编辑权限
+	 */
+	public void prepareExec_edit(){
+		model =  rightService.get(RightId);
+		System.out.println("prepare:"+model);
+	}
+	public String exec_edit(){
+		return "edit";
 	}
 	
 	/**
@@ -80,4 +104,7 @@ public class RightAction extends SupportAction<Right>{
 		pageList = rightService.query(pageList.getCurrentPage(),pageList.getPageSize());
 		return SUCCESS;
 	}
+	
+	
+	
 }

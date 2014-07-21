@@ -16,13 +16,14 @@ public interface SupportService<T> {
 	
 	public void deleteEntryById(T t);
 	
-	public T loadEntry(String id);
+	public T loadEntry(Integer id);
 	
-	public T getEntry(String id);
+	public T getEntry(Integer id);
 	
 	public List<T> getEntryListByHQL(String hql,Object ...objects);
 	
 	public List<T> getEntryListBySQL(String sql,Object ...objects);
 	
 	public EntryPage query(final String hql, int page, final int size);
+
 }

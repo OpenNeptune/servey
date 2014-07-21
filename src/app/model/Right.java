@@ -18,12 +18,10 @@ public class Right {
 	private String uri;
 	
 	//权限组
-	private int	RigthPos;
+	private int	RightPos;
 	
 	//权限码
-	private long RigthCode;
-
-
+	private long RightCode;
 
 	public Integer getRightId() {
 		return RightId;
@@ -57,20 +55,25 @@ public class Right {
 		this.uri = uri;
 	}
 
-	public int getRigthPos() {
-		return RigthPos;
+	public int getRightPos() {
+		return RightPos;
 	}
 
-	public void setRigthPos(int rigthPos) {
-		RigthPos = rigthPos;
+	public void setRightPos(int rightPos) {
+		RightPos = rightPos;
 	}
 
-	public long getRigthCode() {
-		return RigthCode;
+	public long getRightCode() {
+		return RightCode;
 	}
 
-	public void setRigthCode(long rigthCode) {
-		RigthCode = rigthCode;
+	public void setRightCode(long rightCode) {
+		RightCode = rightCode;
+	}
+
+	@Override
+	public String toString() {
+		return "Right [RightId=" + RightId + ", RightName=" + RightName + ", RightDesc=" + RightDesc + ", uri=" + uri + ", RightPos=" + RightPos + ", RightCode=" + RightCode + "]";
 	}
 	
 	

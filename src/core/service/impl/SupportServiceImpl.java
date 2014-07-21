@@ -13,7 +13,7 @@ import core.service.SupportService;
 
 public abstract class SupportServiceImpl<T> implements SupportService<T> {
 	
-		public Logger log = Logger.getLogger(this.getClass());
+		public  Logger log = Logger.getLogger(this.getClass());
 	
 		@Autowired
 		private SupportDao<T> supportDao;
@@ -54,12 +54,12 @@ public abstract class SupportServiceImpl<T> implements SupportService<T> {
 		}
 
 		@Override
-		public T loadEntry(String id) {
+		public T loadEntry(Integer id) {
 			return (T) supportDao.loadEntry(id);
 		}
 
 		@Override
-		public T getEntry(String id) {
+		public T getEntry(Integer id) {
 			return (T) supportDao.getEntry(id);
 		}
 

@@ -12,6 +12,7 @@ public abstract class SupportAction<T> extends ActionSupport implements ModelDri
 	
 	public T model;
 	
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public SupportAction(){
 		try {
@@ -32,7 +33,7 @@ public abstract class SupportAction<T> extends ActionSupport implements ModelDri
 	}
 
 	@Override
-	public void prepare() throws Exception {	}
-	
-	
+	public void prepare() throws Exception {
+		System.out.println("Preparable:"+model);
+	}
 }

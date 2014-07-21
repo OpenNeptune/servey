@@ -62,11 +62,11 @@
         <property name="uri" type="java.lang.String">
             <column name="URI" />
         </property>
-        <property name="RigthPos" type="int" update="false" >
-            <column name="RIGTHPOS" />
+        <property name="RightPos" type="int" update="false" >
+            <column name="RightPos" />
         </property>
-        <property name="RigthCode" type="long" update="false">
-            <column name="RIGTHCODE" />
+        <property name="RightCode" type="long" update="false">
+            <column name="RightCode" />
         </property>
     </class>
 </hibernate-mapping>

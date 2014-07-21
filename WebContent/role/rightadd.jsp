@@ -7,10 +7,10 @@
 <title>添加功能</title>
 </head>
 <body>
+<s:debug></s:debug>
 <s:form action="right_save.action" method="post" theme="xhtml">
 	<s:textfield name="RightName" label="功能名称"></s:textfield>
 	<s:textfield name="uri" label="功能地址"></s:textfield>
-	<s:textfield name="RigthPos" label="功能分组"></s:textfield>
 	<s:textfield name="RightDesc" label="功能描述"></s:textfield>
 	<s:submit value="添加"></s:submit>
 </s:form>
