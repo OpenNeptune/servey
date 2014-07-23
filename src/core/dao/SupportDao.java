@@ -40,4 +40,6 @@ public interface SupportDao<T> {
 	//以分页的方式获得实体
 	public EntryPage query(final String hql, int page, final int size);
 	
+	public List<T> findAll();
+	
 }

@@ -4,6 +4,11 @@ import java.util.List;
 
 
 
+
+
+import lombok.Getter;
+import lombok.Setter;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,30 +21,20 @@ public abstract class SupportServiceImpl<T> implements SupportService<T> {
 		public  Logger log = Logger.getLogger(this.getClass());
 	
 		@Autowired
-		private SupportDao<T> supportDao;
+		@Getter @Setter private SupportDao<T> supportDao;
 		
-		public void saveEntry(T t) {
+		public void save(T t) {
 			supportDao.saveEntry(t);
 		}
 
 
-		public SupportDao<T> getSupportDao() {
-			return supportDao;
-		}
-
-
-		public void setSupportDao(SupportDao<T> supportDao) {
-			this.supportDao = supportDao;
-		}
-
-
 		@Override
-		public void updateEntry(T t) {
+		public void update(T t) {
 			supportDao.updateEntry(t);
 		}
 
 		@Override
-		public void saveOrUpdateEntry(T t) {
+		public void saveOrUpdate(T t) {
 			supportDao.saveOrUpdateEntry(t);
 		}
 
@@ -49,36 +44,43 @@ public abstract class SupportServiceImpl<T> implements SupportService<T> {
 		}
 
 		@Override
-		public void deleteEntryById(T t) {
+		public void delete(T t) {
 			supportDao.deleteEntryById(t);
 		}
 
 		@Override
-		public T loadEntry(Integer id) {
+		public T load(Integer id) {
 			return (T) supportDao.loadEntry(id);
 		}
 
 		@Override
-		public T getEntry(Integer id) {
+		public T get(Integer id) {
 			return (T) supportDao.getEntry(id);
 		}
 
 		@Override
-		public List<T> getEntryListByHQL(String hql, Object... objects) {
+		public List<T> getListByHQL(String hql, Object... objects) {
 			return supportDao.getEntryListByHQL(hql, objects);
 		}
 
 		@Override
-		public List<T> getEntryListBySQL(String sql, Object... objects) {
+		public List<T> getListBySQL(String sql, Object... objects) {
 			return supportDao.getEntryListBySQL(sql, objects);
 		}
 		
-		public List<T> findEntityByHQL(String hql, Object... objects) {
+		public List<T> findByHQL(String hql, Object... objects) {
 			return supportDao.findEntityByHQL(hql, objects);
 		}
 
 		public EntryPage query(final String hql, int page, final int size){
 			return supportDao.query(hql, page, size);
 		}
+
+
+		@Override
+		public List<T> findAll() {
+			return supportDao.findAll();
+		}
+		
 		
 }

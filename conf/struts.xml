@@ -36,7 +36,7 @@
 				-->
 				<interceptor-ref name="log"></interceptor-ref>
 		        <interceptor-ref name="paramsPrepareParamsStack">
-		            <param name="prepare.alwaysInvokePrepare">true</param>
+		            <param name="prepare.alwaysInvokePrepare">fasle</param>
 		        </interceptor-ref>
 		    </interceptor-stack>
 			

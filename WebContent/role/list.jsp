@@ -31,7 +31,7 @@
 	<s:if test="pageList.isHasNextPage()">
 	<s:a href="role_list.action?pageList.currentPage=%{pageList.currentPage + 1}">下一页</s:a>
 	</s:if>
-	<s:a action="/role_add.action">新增角色</s:a>
+	<s:a action="role_add.action">新增角色</s:a>
 </div>
 </body>
 </html>

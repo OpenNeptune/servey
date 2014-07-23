@@ -14,34 +14,28 @@ import core.util.validate;
 
 @Service("userService")
 public class UserServiceImpl extends SupportServiceImpl<User> implements UserService{
-	/**
-	 * 业务层的实现
-	 */
-	public void save(User user) {
-		saveEntry(user);
-	}
 
 	@Override
 	public boolean isRegisterByName(String username) {
 		String hql = "from User u where u.username = ?" ;
-		List<User> list = this.findEntityByHQL(hql, username);
+		List<User> list = this.findByHQL(hql, username);
 		return !validate.isValid(list) ;
 	}
 
 	@Override
 	public boolean isRegisterByEmail(String email) {
 		String hql = "from User u where u.email = ?" ;
-		List<User> list = this.findEntityByHQL(hql, email);
+		List<User> list = this.findByHQL(hql, email);
 		return !validate.isValid(list) ;
 	}
 
 	@Override
 	public User login(User user) {
 		String hql = "from User u where u.username = ? and u.password = ?" ;
-		List<User> list = this.findEntityByHQL(hql,user.getUsername(),sec.md5(user.getPassword()));
+		List<User> list = this.findByHQL(hql,user.getUsername(),sec.md5(user.getPassword()));
 		return validate.isValid(list)?list.get(0):null;
 	}
 
-
+	
 
 }

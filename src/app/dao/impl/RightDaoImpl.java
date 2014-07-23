@@ -9,4 +9,7 @@ import core.dao.impl.SupportDaoImpl;
 @Repository("rightDao")
 public class RightDaoImpl extends SupportDaoImpl<Right> implements RightDao{
 
+
+
+
 }

@@ -2,6 +2,9 @@ package app.struts.action;
 
 import javax.annotation.Resource;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -23,35 +26,13 @@ public class RightAction extends SupportAction<Right>{
 
 	private static final long serialVersionUID = -4596824964084141573L;
 	
-	private EntryPage pageList = new EntryPage();
+	@Getter @Setter private EntryPage pageList = new EntryPage();
 	
-	private Integer RightId;
-	
-	public void setRightId(Integer rightId) {
-		RightId = rightId;
-	}
-	public Integer getRightId() {
-		return RightId;
-	}
-
+	@Getter @Setter private Integer RightId;
 
 	@Resource(name="rightService")
-	private RightService rightService;
+	@Getter @Setter private RightService rightService;
 
-	public RightService getRightService() {
-		return rightService;
-	}
-	public void setRightService(RightService rightService) {
-		this.rightService = rightService;
-	}
-	
-	
-	public EntryPage getPageList() {
-		return pageList;
-	}
-	public void setPageList(EntryPage pageList) {
-		this.pageList = pageList;
-	}
 	
 	//
 	//Action方法
@@ -66,6 +47,16 @@ public class RightAction extends SupportAction<Right>{
 	/**
 	 * 新增一个功能
 	 */
+	public void prepareExec_save(){
+		if(model != null && model.getRightId() != null){
+			model = rightService.get(RightId);
+		}else{
+			model = new Right();
+		}
+	}
+	public void validateExec_save(){
+
+	}
 	public String exec_save(){
 		rightService.saveOrUpdate(model);
 		return "list";
@@ -78,9 +69,19 @@ public class RightAction extends SupportAction<Right>{
 		model =  rightService.get(RightId);
 		System.out.println("prepare:"+model);
 	}
+	
+	public void validateExec_edit(){
+		if(!core.util.validate.isValid(RightId)){
+			addFieldError("RightId","非法的记录ID");
+		}
+		if(hasErrors()){
+			return;
+		}
+	}
 	public String exec_edit(){
 		return "edit";
 	}
+	
 	
 	/**
 	 * 更新一个功能 
@@ -105,6 +106,11 @@ public class RightAction extends SupportAction<Right>{
 		return SUCCESS;
 	}
 	
-	
-	
+	/**
+	 * 刷新系统的现有的功能模块
+	 */
+	public String exec_refresh(){
+		rightService.refreshRight();
+		return "list";
+	}
 }

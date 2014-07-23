@@ -74,7 +74,11 @@ public class ServiceIntercetor {
 			log.setResult("success");
 			//设置结果消息
 			if(ret != null){
-				log.setMsg(ret.toString());
+				String msg= ret.toString();
+				if(msg.length() > 100){
+					msg = msg.substring(0, 100);
+				}
+				log.setMsg(msg);
 			}
 			return ret ;
 		}catch(Throwable e){
@@ -86,6 +90,7 @@ public class ServiceIntercetor {
 			}
 			log.setMsg(msg);
 		}finally{
+			//System.out.println(log);
 			businessLogService.save(log);
 		}
 		return null;

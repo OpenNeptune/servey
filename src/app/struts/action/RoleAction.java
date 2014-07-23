@@ -2,6 +2,9 @@ package app.struts.action;
 
 import javax.annotation.Resource;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -21,24 +24,10 @@ public class RoleAction extends SupportAction<Role>{
 
 	private static final long serialVersionUID = -4596824964084141573L;
 	
-	private EntryPage pageList = new EntryPage();
+	@Getter @Setter private EntryPage pageList = new EntryPage();
 	
 	@Resource(name="roleService")
-	private RoleService roleService;
-
-	public RoleService getRoleService() {
-		return roleService;
-	}
-	public void setRoleService(RoleService roleService) {
-		this.roleService = roleService;
-	}
-	public EntryPage getPageList() {
-		return pageList;
-	}
-	public void setPageList(EntryPage pageList) {
-		this.pageList = pageList;
-	}
-	
+	@Getter @Setter private RoleService roleService;
 	
 	//
 	//Action方法

@@ -8,7 +8,7 @@ import org.junit.Test;
 public class validateTest {
 	@Test
 	public void listTest(){
-		List list = new ArrayList();
+		List<Integer> list = new ArrayList<Integer>();
 		System.out.println(validate.isValid(list));
 		list.add(1);
 		System.out.println(validate.isValid(list));

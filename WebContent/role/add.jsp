@@ -7,10 +7,14 @@
 <title>新增角色</title>
 </head>
 <body>
+<s:debug></s:debug>
 <s:form action="role_save.action" method="post" theme="xhtml">
 	<s:textfield name="RoleName" label="RoleName"></s:textfield>
 	<s:textfield name="NickName" label="NickName"></s:textfield>
 	<s:textfield name="RoleDesc" label="RoleDesc"></s:textfield>
+	<s:iterator value="%{#application.all_rights_map}" var="r">
+		<s:property value="#r.key"/>:<s:property value="#r.value.RightName"/>
+	</s:iterator>
 	<s:submit value="添加"></s:submit>
 </s:form>
 </body>

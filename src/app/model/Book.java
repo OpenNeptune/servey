@@ -1,45 +1,19 @@
 package app.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class Book {
-	private Integer id;
+	@Getter @Setter private Integer id;
 	
-	private String  productID;
+	@Getter @Setter private String  productID;
 	
-	private String  bookname;
+	@Getter @Setter private String  bookname;
 	
-	private String  author;
+	@Getter @Setter private String  author;
 
-	public Integer getId() {
-		return id;
+	@Override
+	public String toString() {
+		return "Book [id=" + id + ", productID=" + productID + ", bookname=" + bookname + ", author=" + author + "]";
 	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getProductID() {
-		return productID;
-	}
-
-	public void setProductID(String productID) {
-		this.productID = productID;
-	}
-
-	public String getBookname() {
-		return bookname;
-	}
-
-	public void setBookname(String bookname) {
-		this.bookname = bookname;
-	}
-
-	public String getAuthor() {
-		return author;
-	}
-
-	public void setAuthor(String author) {
-		this.author = author;
-	}
-	
-	
 }

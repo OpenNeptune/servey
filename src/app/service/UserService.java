@@ -8,8 +8,6 @@ import core.service.SupportService;
  * 		主要用于扩展
  */
 public interface UserService extends SupportService<User> {
-	//用户注册
-	public void save(User user);
 	
 	//判断该用户名是否可以注册
 	public boolean isRegisterByName(String username);

@@ -9,6 +9,7 @@
 <body>
 <table>
 	<tr>
+		<th>序号</th>
 		<th>功能名称</th>
 		<th>功能昵称</th>
 		<th>功能分组</th>
@@ -16,8 +17,9 @@
 		<th>功能描述</th>
 		<th>操作</th>
 	</tr>
-	<s:iterator value="pageList.getList()">
+	<s:iterator value="pageList.getList()" status="st">
 		<tr>
+			<td><s:property value="%{st.index}"/></td>
 			<s:hidden value="RightId"></s:hidden>
 			<td><s:property value="RightName"/></td>
 			<td><s:property value="uri"/></td>
@@ -39,6 +41,7 @@
 	<s:a href="right_list.action?pageList.currentPage=%{pageList.currentPage + 1}">下一页</s:a>
 	</s:if>
 	<s:a action="right_add.action">新增功能</s:a>
+	<s:a action="right_refresh.action">功能刷新</s:a>
 </div>
 </body>
 </html>

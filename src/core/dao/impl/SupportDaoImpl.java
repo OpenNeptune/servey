@@ -1,14 +1,15 @@
 package core.dao.impl;
-/******************************************************************
- * @summary:
- * 		用于完成DAO操作的抽象基类，主要用于继承
- ******************************************************************/
+
 import java.lang.reflect.ParameterizedType;
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
@@ -18,26 +19,23 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import core.dao.SupportDao;
 import core.model.EntryPage;
-
-
+/******************************************************************
+ * @summary:
+ * 		用于完成DAO操作的抽象基类，主要用于继承
+ ******************************************************************/
+@SuppressWarnings({ "unchecked", "deprecation","rawtypes" })
 public abstract class SupportDaoImpl<T>  implements SupportDao<T> {
+	public  Logger log = Logger.getLogger(this.getClass());
 	
 	@Resource(name="hibernateTemplate")
-	private HibernateTemplate hibernateTemplate;
+	@Getter @Setter private HibernateTemplate hibernateTemplate;
 	
-	public HibernateTemplate getHibernateTemplate() {
-		return hibernateTemplate;
-	}
 
-	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-		this.hibernateTemplate = hibernateTemplate;
-	}
-
-	//构造时初始（获取泛型）
+	
 	private Class<T> clazz;
 	
-	@SuppressWarnings("unchecked")
 	public SupportDaoImpl(){
+		//构造时初始（获取泛型）
 		ParameterizedType type = (ParameterizedType) this.getClass().getGenericSuperclass();
 		clazz = (Class<T>) type.getActualTypeArguments()[0];
 	}
@@ -54,7 +52,6 @@ public abstract class SupportDaoImpl<T>  implements SupportDao<T> {
 		hibernateTemplate.saveOrUpdate(t);
 	}
 
-	@SuppressWarnings("unchecked")
 	public int batchByHQL(String hql, Object... objects) {
 		 List<T> list = (List<T>) hibernateTemplate.find(hql,objects);
 		return list.size();
@@ -72,13 +69,11 @@ public abstract class SupportDaoImpl<T>  implements SupportDao<T> {
 		return hibernateTemplate.get(clazz, id);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<T> getEntryListByHQL(String hql,Object ...objects) {
 		List<T> list = (List<T>) hibernateTemplate.find(hql,objects);
 		return list;
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<T> getEntryListBySQL(String sql,Object ...objects) {
 		//如果没有开启事务管理，在线程中不允许获取session
 		SQLQuery q =  hibernateTemplate.getSessionFactory().getCurrentSession().createSQLQuery(sql);
@@ -92,7 +87,6 @@ public abstract class SupportDaoImpl<T>  implements SupportDao<T> {
 		return q.list();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> findEntityByHQL(String hql, Object[] objects) {
 		return (List<T>) hibernateTemplate.find(hql,objects);
@@ -102,7 +96,6 @@ public abstract class SupportDaoImpl<T>  implements SupportDao<T> {
 	 * page默认值为1. 从第一页开始
 	 * size默认值为100,每页100条记录
 	 */
-	@SuppressWarnings({ "unchecked", "deprecation","rawtypes" })
 	public EntryPage query(final String hql, int page, final int size) {
 		final EntryPage pageInfo = new EntryPage();
 		pageInfo.setPageSize(size);
@@ -122,4 +115,15 @@ public abstract class SupportDaoImpl<T>  implements SupportDao<T> {
 		pageInfo.init();
 		return pageInfo;
 	}
+
+	
+	@Override
+	public List<T> findAll() {
+		String hql = "from "+clazz.getSimpleName()+ " where 1 = 1";
+		log.info("findAll:"+hql);
+		List<T> list = (List<T>) hibernateTemplate.find(hql);
+		return list;
+	}
+	
+	
 }

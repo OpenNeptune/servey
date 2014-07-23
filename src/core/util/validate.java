@@ -8,6 +8,11 @@ import core.constant.constant;
 
 public class validate {
 	
+	public static boolean isValid(Integer id){
+		return !(id == null || id == 0);
+	}
+	
+	
 	/**
 	 * 判断字符串有效性
 	 */

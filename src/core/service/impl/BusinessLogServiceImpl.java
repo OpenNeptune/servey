@@ -7,12 +7,5 @@ import core.service.BusinessLogService;
 
 @Service("businessLogService")
 public class BusinessLogServiceImpl extends SupportServiceImpl<BusinessLog> implements BusinessLogService {
-
-	@Override
-	public void save(BusinessLog log) {
-		this.saveEntry(log);
-	}
-
-
 	
 }

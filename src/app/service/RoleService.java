@@ -2,6 +2,8 @@ package app.service;
 
 import app.model.Role;
 import core.model.EntryPage;
+import core.service.SupportService;
+
 
 
 /***
@@ -9,11 +11,8 @@ import core.model.EntryPage;
  * @sumary:
  * 		主要用于扩展
  */
-public interface RoleService {
-	
-	public void save(Role model);
-	
-	public EntryPage query(int page, int size);
+public interface RoleService extends SupportService<Role>{
 
+	EntryPage query(int currentPage, int pageSize);
 	
 }

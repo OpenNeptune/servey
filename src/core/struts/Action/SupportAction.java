@@ -34,6 +34,5 @@ public abstract class SupportAction<T> extends ActionSupport implements ModelDri
 
 	@Override
 	public void prepare() throws Exception {
-		System.out.println("Preparable:"+model);
 	}
 }
