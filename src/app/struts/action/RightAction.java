@@ -29,7 +29,7 @@ public class RightAction extends SupportAction<Right>{
 	@Getter @Setter private EntryPage pageList = new EntryPage();
 	
 	@Getter @Setter private Integer RightId;
-
+	
 	@Resource(name="rightService")
 	@Getter @Setter private RightService rightService;
 
@@ -67,7 +67,7 @@ public class RightAction extends SupportAction<Right>{
 	 */
 	public void prepareExec_edit(){
 		model =  rightService.get(RightId);
-		System.out.println("prepare:"+model);
+		log.info("prepare:"+model);
 	}
 	
 	public void validateExec_edit(){

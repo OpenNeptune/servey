@@ -2,6 +2,7 @@ package app.struts.action;
 
 import javax.annotation.Resource;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import app.model.Book;
@@ -13,6 +14,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import core.util.sec;
 
 @Controller("transactionAction")
+@Scope("prototype")
 public class transactionAction extends ActionSupport {
 
 	private static final long serialVersionUID = 7751604972083199971L;

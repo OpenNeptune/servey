@@ -9,9 +9,10 @@
 <body>
 <table>
 	<tr>
-		<th>角色名称</th>
-		<th>角色呢称</th>
-		<th>角色描述</th>
+		<th width="10%">角色名称</th>
+		<th width="10%">角色呢称</th>
+		<th width="60%">角色描述</th>
+		<th width="20%">操作</th>
 	</tr>
 	<s:iterator value="pageList.getList()">
 		<tr>
@@ -19,6 +20,11 @@
 			<td><s:property value="RoleName"/></td>
 			<td><s:property value="NickName"/></td>
 			<td><s:property value="RoleDesc"/></td>
+			<td>
+				<s:a href="role_edit.action?RoleId=%{RoleId }" >修改</s:a>
+				&nbsp;&nbsp;
+				<s:a href="role_delete.action?RoleId=%{RoleId }" >删除</s:a>
+			</td>
 		</tr>
 	</s:iterator>
 </table>

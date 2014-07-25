@@ -37,7 +37,7 @@ public class ServiceIntercetor {
 			String opeationName =pjp.getTarget().getClass().getName()+"::"+pjp.getSignature().getName();
 			log.setOperationName(opeationName);
 			//操作参数 
-			log.setOperationParam(StringUtil.arr2Str(pjp.getArgs()));
+			//log.setOperationParam(StringUtil.arr2Str(pjp.getArgs()));
 			
 			//获取session中的数据
 			ActionContext context = ActionContext.getContext();
@@ -90,7 +90,6 @@ public class ServiceIntercetor {
 			}
 			log.setMsg(msg);
 		}finally{
-			//System.out.println(log);
 			businessLogService.save(log);
 		}
 		return null;

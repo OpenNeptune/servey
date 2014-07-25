@@ -19,15 +19,18 @@
 	</tr>
 	<s:iterator value="pageList.getList()" status="st">
 		<tr>
-			<td><s:property value="%{st.index}"/></td>
+			<td><s:property value="%{#st.index}"/></td>
 			<s:hidden value="RightId"></s:hidden>
 			<td><s:property value="RightName"/></td>
 			<td><s:property value="uri"/></td>
 			<td><s:property value="RightPos"/></td>
 			<td><s:property value="RightCode"/></td>
 			<td><s:property value="RightDesc"/></td>
-			<td><s:a href="right_edit.action?RightId=%{RightId }" >修改</s:a>
-			&nbsp;&nbsp;<s:a href="right_delete.action?RightId=%{RightId }" >删除</s:a></td>
+			<td>
+				<s:a href="right_edit.action?RightId=%{RightId }" >修改</s:a>
+				&nbsp;&nbsp;
+				<s:a href="right_delete.action?RightId=%{RightId }" >删除</s:a>
+			</td>
 		</tr>
 	</s:iterator>
 </table>

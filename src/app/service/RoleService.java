@@ -15,4 +15,5 @@ public interface RoleService extends SupportService<Role>{
 
 	EntryPage query(int currentPage, int pageSize);
 	
+	
 }

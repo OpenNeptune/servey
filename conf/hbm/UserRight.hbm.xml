@@ -24,7 +24,7 @@
 	<!-- 配置角色 -->
     <class name="app.model.Role" table="TBL_HBM_ROLE">
         <id name="RoleId" type="java.lang.Integer">
-            <column name="ROLEID" />
+            <column name="ROLE_ID" />
             <generator class="native" />
         </id>
         <property name="RoleName" type="java.lang.String">
@@ -39,18 +39,16 @@
         <property name="RoleDesc" type="java.lang.String">
             <column name="ROLEDESC" />
         </property>
-        <set name="rights" table="TBL_HBM_ROLE_RIGHT_LINK" inverse="false" lazy="true">
-            <key>
-                <column name="ROLEID" />
-            </key>
-            <many-to-many class="app.model.Right" column="RightId"/>
+		 <set name="rights" table="TBL_HBM_ROLE_RIGHT_LINK"  lazy="false">
+        	<key column="ROLE_ID"></key>
+        	<many-to-many class="app.model.Right" column="Right_Id"></many-to-many>
         </set>
     </class>
     
     <!-- 配置权限 -->
     <class name="app.model.Right" table="TBL_HBM_RIGHT">
         <id name="RightId" type="java.lang.Integer">
-            <column name="RightId" />
+            <column name="Right_Id" />
             <generator class="native" />
         </id>
         <property name="RightName" type="java.lang.String">

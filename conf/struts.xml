@@ -12,7 +12,7 @@
 	
 	
 	<package name="default"  extends="struts-default">
-		
+
 		<!-- 定义一个有日志打印的拦截器栈 -->
 		<interceptors>
 			<!-- 
@@ -37,6 +37,9 @@
 				<interceptor-ref name="log"></interceptor-ref>
 		        <interceptor-ref name="paramsPrepareParamsStack">
 		            <param name="prepare.alwaysInvokePrepare">fasle</param>
+		                   <param name="exception.logEnabled">true</param>
+       						<param name="exception.logLevel">ERROR</param>
+      						<param name="params.excludeParams">dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,parameters\...*,submit</param>
 		        </interceptor-ref>
 		    </interceptor-stack>
 			
@@ -44,9 +47,15 @@
 		
 		<default-interceptor-ref name="logstack"></default-interceptor-ref>
 		<!-- 定义全局结果 -->
+	
 		<global-results>
 			<result name="login">/user/login.jsp</result>
+			<result name="error">/error.jsp</result>
 		</global-results>
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="error" />
+		</global-exception-mappings>
+		
 		
 		<action name="user_*" class="userAction" method="exec_{1}">
 			<result name="register">/user/register.jsp</result>
@@ -70,11 +79,26 @@
 			<result>/buesslog/list.jsp</result>
 		</action>
 		
+		<!-- 用户刷新application内容的属性内容 -->
+		<action name="cache_*" class="cacheManagerAction" method="exec_{1}">
+			<result name="success">/index.jsp</result>
+		</action>
+		
 		<!-- 角色管理 -->
 		<action name="role_*" class="roleAction" method="exec_{1}">
+			<interceptor-ref name="curdStack"></interceptor-ref>
 			<result name="add_page">/role/add.jsp</result>
+			<result name="edit">/role/add.jsp</result>
 			<result name="input">/role/add.jsp</result>
 			<result name="success">/role/list.jsp</result>
+			<result name="list" type="redirectAction">role_list</result>
+		</action>
+		
+		<!-- 角色关联权限 -->
+		<action name="rolerigth_*" class="roleRigthAction" method="exec_{1}">
+			<interceptor-ref name="curdStack"></interceptor-ref>
+			<result name="edit">role/role_right.jsp</result>
+			<result name="input">role/role_right.jsp</result>
 			<result name="list" type="redirectAction">role_list</result>
 		</action>
 			

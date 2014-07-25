@@ -8,6 +8,7 @@
 </head>
 <body>
 <s:form action="right_save.action" method="post" theme="xhtml">
+	<s:token></s:token>
 	<s:textfield name="RightName" label="功能名称"></s:textfield>
 	<s:textfield name="uri" label="功能地址"></s:textfield>
 	<s:textfield name="RightDesc" label="功能描述"></s:textfield>

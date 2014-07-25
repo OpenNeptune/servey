@@ -21,6 +21,6 @@ public class RoleServiceImpl extends SupportServiceImpl<Role> implements RoleSer
 		String hql ="from Role a order by a.RoleId desc";
 		return super.query(hql, page, size);
 	}
-	
+
 	
 }

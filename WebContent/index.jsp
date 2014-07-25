@@ -13,5 +13,6 @@
 	<s:a action="log_list.action">业务日志</s:a>
 	<s:a action="role_list.action">角色管理</s:a>
 	<s:a action="right_list.action">功能管理</s:a>
+	<s:a action="cache_refersh.action">清楚缓存</s:a>
 </body>
 </html>

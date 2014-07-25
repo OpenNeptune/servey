@@ -36,7 +36,9 @@
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
                 <prop key="hibernate.format_sql">false</prop>
 				<prop key="hibernate.show_sql">false</prop>
+				<!--  
 				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				-->
            </props>
         </property>
         <!-- 全部映射文件 -->

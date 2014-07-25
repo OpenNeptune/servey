@@ -1,7 +1,9 @@
 package app.service.impl;
 
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ import core.util.validate;
 
 @Service("rightService")
 public class RightServiceImpl extends SupportServiceImpl<Right> implements RightService {
+	
 	@Override
 	public void saveOrUpdate(Right model) {
 		int rightPos = 0;
@@ -69,6 +72,8 @@ public class RightServiceImpl extends SupportServiceImpl<Right> implements Right
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+
 	}
 
 
@@ -88,6 +93,14 @@ public class RightServiceImpl extends SupportServiceImpl<Right> implements Right
 		}
 	}
 
-
-
+	public Set<Right> getByArray(String[] rightId){
+		Set<Right> set = new HashSet<Right>();
+		if(validate.isValid(rightId)){
+			for(int i=0;i<rightId.length;i++){
+				Right right = this.get(Integer.parseInt(rightId[i]));
+				set.add(right);
+			}
+		}
+		return set;
+	}
 }

@@ -1,5 +1,7 @@
 package app.service;
 
+import java.util.Set;
+
 import app.model.Right;
 import core.model.EntryPage;
 import core.service.SupportService;
@@ -28,5 +30,10 @@ public interface RightService extends SupportService<Right>{
 	 * @param url
 	 */
 	public void appendRightByURL(String url);
+	
+	/**
+	 * 通过一个权限ID数组，获取一个权限Set
+	 */
+	public Set<Right> getByArray(String[] rightId);
 
 }

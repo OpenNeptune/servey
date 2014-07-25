@@ -1,5 +1,8 @@
 package app.struts.action;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.annotation.Resource;
 
 import lombok.Getter;
@@ -29,6 +32,9 @@ public class RoleAction extends SupportAction<Role>{
 	@Resource(name="roleService")
 	@Getter @Setter private RoleService roleService;
 	
+	@Getter @Setter private Integer RoleId;
+	
+	
 	//
 	//Action方法
 	//
@@ -42,16 +48,49 @@ public class RoleAction extends SupportAction<Role>{
 	/**
 	 * 新增一个角色 
 	 */
+	public void prepareExec_save(){
+		if(RoleId != null){
+			model = roleService.get(RoleId);
+		}else{
+			model = new Role();
+		}
+		log.info("prepare:"+model);
+	}
+	public void validateExec_save(){
+		if(RoleId != null){
+
+		}
+		if(hasErrors()){
+			return;
+		}
+	}
 	public String exec_save(){
-		roleService.save(model);
+		System.out.println(model);
+		roleService.saveOrUpdate(model);
 		return "list";
 	}
 	
 	/**
 	 * 更新一个角色 
 	 */
-	public String exec_update(){
-		return "list";
+	public void prepareExec_edit(){
+		if(RoleId != null){
+			model = roleService.get(RoleId);
+		}else{
+			model = new Role();
+		}
+	}
+	public void validateExec_edit(){
+		if(!core.util.validate.isValid(RoleId)){
+			addFieldError("RoleId","非法的记录ID");
+			log.info("validate:非法的记录ID");
+		}
+		if(hasErrors()){
+			return;
+		}
+	}
+	public String exec_edit(){
+		return "edit";
 	}
 	
 	/**
