@@ -7,12 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
+<s:debug></s:debug>
 	<s:property value="#session.user.username"/>
 	<s:a action="login_tlogin.action">用户登录</s:a>
 	<s:a action="user_tregister.action">用户注册</s:a>
 	<s:a action="log_list.action">业务日志</s:a>
+	<s:a action="users_list.action">用户管理</s:a>
 	<s:a action="role_list.action">角色管理</s:a>
 	<s:a action="right_list.action">功能管理</s:a>
 	<s:a action="cache_refersh.action">清楚缓存</s:a>
+	
 </body>
 </html>

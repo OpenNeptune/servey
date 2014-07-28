@@ -19,12 +19,17 @@
 			<interceptor name="login" class="app.struts.interceptor.loginInterceptor"/>
 			 -->
 			<interceptor name="log" class="core.struts.interceptor.LogInterceptor"/>
+			
+			<!-- 权限校验连接器 -->
+			<interceptor name="right" class="core.struts.interceptor.RigthFilterIntercetor"/>
+			
 			<!-- 普通的日志拦截器栈 -->
 			<interceptor-stack name="logstack">
 				<!--  
 				<interceptor-ref name="login"></interceptor-ref>
 				-->
 				<interceptor-ref name="log"></interceptor-ref>
+				<interceptor-ref name="right"></interceptor-ref>
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 			</interceptor-stack>
 			
@@ -35,6 +40,7 @@
 				<interceptor-ref name="login"></interceptor-ref>
 				-->
 				<interceptor-ref name="log"></interceptor-ref>
+				<interceptor-ref name="right"></interceptor-ref>
 		        <interceptor-ref name="paramsPrepareParamsStack">
 		            <param name="prepare.alwaysInvokePrepare">fasle</param>
 		                   <param name="exception.logEnabled">true</param>
@@ -84,6 +90,15 @@
 			<result name="success">/index.jsp</result>
 		</action>
 		
+		<!-- 用户管理 -->
+		<action name="users_*" class="userManagerAction" method="exec_{1}">
+			<interceptor-ref name="curdStack"></interceptor-ref>
+			<result name="edit">/role/userManager.jsp</result>
+			<result name="input">/role/userManager.jsp</result>
+			<result name="success">/role/userManagerList.jsp</result>
+			<result name="list" type="redirectAction">users_list</result>
+		</action>
+		
 		<!-- 角色管理 -->
 		<action name="role_*" class="roleAction" method="exec_{1}">
 			<interceptor-ref name="curdStack"></interceptor-ref>
@@ -94,14 +109,6 @@
 			<result name="list" type="redirectAction">role_list</result>
 		</action>
 		
-		<!-- 角色关联权限 -->
-		<action name="rolerigth_*" class="roleRigthAction" method="exec_{1}">
-			<interceptor-ref name="curdStack"></interceptor-ref>
-			<result name="edit">role/role_right.jsp</result>
-			<result name="input">role/role_right.jsp</result>
-			<result name="list" type="redirectAction">role_list</result>
-		</action>
-			
 		<!-- 功能管理 -->
 		<action name="right_*" class="rightAction" method="exec_{1}">
 			<interceptor-ref name="curdStack"></interceptor-ref>

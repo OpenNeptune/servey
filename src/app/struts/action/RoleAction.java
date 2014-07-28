@@ -1,8 +1,5 @@
 package app.struts.action;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.annotation.Resource;
 
 import lombok.Getter;

@@ -1,5 +1,7 @@
 package app.service;
 
+import java.util.Set;
+
 import app.model.Role;
 import core.model.EntryPage;
 import core.service.SupportService;
@@ -13,7 +15,7 @@ import core.service.SupportService;
  */
 public interface RoleService extends SupportService<Role>{
 
-	EntryPage query(int currentPage, int pageSize);
+	public EntryPage query(int currentPage, int pageSize);
 	
-	
+	public Set<Role> getByArray(String[] roleId);
 }

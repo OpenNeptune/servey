@@ -35,19 +35,20 @@
 <body>
 <table>
 	<tr>
-		<th>行号</th>
-		<th>操作时间</th>
-		<th>操作人</th>
-		<th>操作项</th>
-		<th>操作结果</th>
+		<th width="8%">行号</th>
+		<th width="14%">操作时间</th>
+		<th width="8%%">操作人</th>
+		<th width="10%">操作结果</th>
+		<th width="70%">操作项</th>
+		
 	</tr>
 	<s:iterator value="model.getList()">
 		<tr>
 			<td><s:property value="id"/></td>
 			<td><s:property value="startTime"/></td>
 			<td><s:property value="username"/></td>
-			<td><s:property value="operationName"/></td>
 			<td><s:property value="result"/></td>
+			<td><s:property value="operationName"/></td>
 		</tr>
 	</s:iterator>
 </table>

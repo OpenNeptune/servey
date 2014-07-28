@@ -103,4 +103,13 @@ public class RightServiceImpl extends SupportServiceImpl<Right> implements Right
 		}
 		return set;
 	}
+
+
+
+	@Override
+	public int getMaxRightPos() {
+		String hql = "select max(r.RightPos) from Right r";
+		Integer pos = (Integer) this.uniqueResult(hql);
+		return pos == null ? 0 : pos ;
+	}
 }

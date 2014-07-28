@@ -125,5 +125,8 @@ public abstract class SupportDaoImpl<T>  implements SupportDao<T> {
 		return list;
 	}
 	
-	
+	public Object uniqueResult(String hql,Object...objects){
+		List<?> q = hibernateTemplate.find(hql, objects);
+		return q.get(0);
+	}
 }

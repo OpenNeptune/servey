@@ -36,4 +36,9 @@ public interface RightService extends SupportService<Right>{
 	 */
 	public Set<Right> getByArray(String[] rightId);
 
+	
+	/**
+	 * 获得权限的最大分组
+	 */
+	public int getMaxRightPos();
 }

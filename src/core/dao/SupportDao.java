@@ -26,6 +26,8 @@ public interface SupportDao<T> {
 	//加载实体
 	public T getEntry(Integer id);
 	
+	public Object uniqueResult(String hql,Object...objects);
+	
 	//以HQL方式批量操作
 	public int batchByHQL(String hql,Object ...objects);
 	

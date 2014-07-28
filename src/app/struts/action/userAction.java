@@ -4,6 +4,10 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -17,19 +21,30 @@ import core.util.validate;
 
 @Controller("userAction")
 @Scope("prototype")
-public class userAction extends SupportAction<User>  implements SessionAware{
+public class userAction extends SupportAction<User>  implements SessionAware,ApplicationAware{
 
 	private static final long serialVersionUID = 1130308026828193803L;
 
-	private String registerCode;
+	@Getter @Setter private String registerCode;
 	
-	private String confirPassword;
+	@Getter @Setter private String confirPassword;
 	
-	@Resource
-	private UserService userService;
+	@Resource(name="userService")
+	@Getter @Setter private UserService userService;
 	
-	private Map<String, Object> sessionMap;
+	@Getter @Setter private Map<String, Object> applicationMap;
 	
+	@Getter @Setter private Map<String, Object> sessionMap;
+	
+	@Override
+	public void setSession(Map<String, Object> arg0) {
+		this.sessionMap =arg0;
+	}
+
+	@Override
+	public void setApplication(Map<String, Object> arg0) {
+		this.applicationMap = arg0;
+	}
 	/**
 	 * 用户注册
 	 */
@@ -74,7 +89,6 @@ public class userAction extends SupportAction<User>  implements SessionAware{
 		if(hasErrors()){
 			return;
 		}
-		
 	}
 
 	
@@ -84,11 +98,15 @@ public class userAction extends SupportAction<User>  implements SessionAware{
 	public String exec_tlogin(){
 		return "input";
 	}
+	
 	public String exec_login(){
 		String result="input";
 		User user = userService.login(model);
 		if(user != null){
-			sessionMap.put("user", model);
+			int max_right_pos = (Integer) applicationMap.get("max_right_pos");
+			user.setRightSum(new long[max_right_pos + 1]);
+			user.calculateRightSum();
+			sessionMap.put("user", user);
 			result ="login_success";
 		}else{
 			addFieldError("password","错误的用户名和密码");
@@ -106,25 +124,5 @@ public class userAction extends SupportAction<User>  implements SessionAware{
 			return;
 		}
 	}
-	
-	public String getRegisterCode() {
-		return registerCode;
-	}
 
-	public void setRegisterCode(String registerCode) {
-		this.registerCode = registerCode;
-	}
-
-	public String getConfirPassword() {
-		return confirPassword;
-	}
-
-	public void setConfirPassword(String confirPassword) {
-		this.confirPassword = confirPassword;
-	}
-
-	@Override
-	public void setSession(Map<String, Object> arg0) {
-		this.sessionMap =arg0;
-	}
 }

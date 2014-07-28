@@ -82,5 +82,7 @@ public abstract class SupportServiceImpl<T> implements SupportService<T> {
 			return supportDao.findAll();
 		}
 		
-		
+		public Object uniqueResult(String hql,Object...objects){
+			return supportDao.uniqueResult(hql, objects);
+		}
 }

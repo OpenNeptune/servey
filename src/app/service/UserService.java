@@ -1,6 +1,7 @@
 package app.service;
 
 import app.model.User;
+import core.model.EntryPage;
 import core.service.SupportService;
 /***
  * 
@@ -18,5 +19,7 @@ public interface UserService extends SupportService<User> {
 	//用户登录
 	public User login(User user);
 	
+	//
+	public EntryPage query(int currentPage, int pageSize);
 	
 }

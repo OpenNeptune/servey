@@ -11,27 +11,27 @@ import lombok.Setter;
 import org.apache.log4j.Logger;
 import org.apache.struts2.util.StrutsTypeConverter;
 
-import app.model.Right;
-import app.service.RightService;
+import app.model.Role;
+import app.service.RoleService;
 @SuppressWarnings("rawtypes")
-public class Role_RightConverter extends StrutsTypeConverter {
+public class User_RoleConverter extends StrutsTypeConverter {
+
+	public static Logger log = Logger.getLogger(User_RoleConverter.class);
 	
-	public static Logger log = Logger.getLogger(Role_RightConverter.class);
+	@Resource(name="roleService")
+	@Getter @Setter public RoleService roleService;
 	
-	@Resource(name="rightService")
-	@Getter @Setter public RightService rightService;
-	
-	public Role_RightConverter() {
-		log.info("app.model.Right类型转换器创建...");
+	public User_RoleConverter() {
+		log.info("app.model.Role类型转换器创建...");
 	}
-	
+
 	@Override
 	public Object convertFromString( Map arg0, String[] arg1, Class arg2) {
-		Right obj = null;
-		if(arg2 == Right.class){
-			Iterator<Right> iterator = rightService.getByArray(arg1).iterator();
+		Role obj = null;
+		if(arg2 == Role.class){
+			Iterator<Role> iterator = roleService.getByArray(arg1).iterator();
 			while (iterator.hasNext()) {
-				obj = (Right) iterator.next();
+				obj = (Role) iterator.next();
 			}
 		}
 		log.info("类型转换FromString:"+arg0+"|"+arg1+"|"+arg2+"|"+obj);
@@ -41,9 +41,9 @@ public class Role_RightConverter extends StrutsTypeConverter {
 	@Override
 	public String convertToString(Map arg0, Object arg1) {
 		String result=null;
-		if(arg1 ==  Right.class){
-			Right obj = (Right) arg1;
-			result =String.valueOf(obj.getRightId());
+		if(arg1 ==  Role.class){
+			Role obj = (Role) arg1;
+			result =String.valueOf(obj.getRoleId());
 		}
 		log.info("类型转换ToString:"+arg0+"|"+arg1+"|"+result);
 		return result;

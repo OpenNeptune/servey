@@ -51,7 +51,8 @@ public class ApplicationMapListener implements ApplicationListener,ServletContex
 			for(Right r : rights){
 				right_map.put(r.getUri(), r);
 			}
-
+			
+			int max_right_pos = rightService.getMaxRightPos();
 			
 			List<Role> roles = roleService.findAll();
 			Map<String,Role> role_map = new HashMap<String,Role>();
@@ -62,6 +63,8 @@ public class ApplicationMapListener implements ApplicationListener,ServletContex
 			if(context != null){
 				//初始化到Application中!!!!
 				context.setAttribute("all_rights_map", right_map);
+				
+				context.setAttribute("max_right_pos", max_right_pos);
 				
 				context.setAttribute("all_roles_map", role_map);
 			}

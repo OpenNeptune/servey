@@ -20,6 +20,8 @@ public interface SupportService<T> {
 	
 	public T get(Integer id);
 	
+	public Object uniqueResult(String hql,Object...objects);
+	
 	public List<T> getListByHQL(String hql,Object ...objects);
 	
 	public List<T> getListBySQL(String sql,Object ...objects);
